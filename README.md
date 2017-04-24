@@ -5,14 +5,15 @@ A Symfony project created by Nick Schirmer as a tech demonstration for FloSports
 
 # Setup
 
-1. Install dependencies: `composer install`
-2. Configure your database: `vi app/config/parameters.yml`
-3. To run Homestead on Vagrant:
+1. Install composer dependencies: `composer install`
+2. Install bower components: `bower install`
+3. Configure your database: `vi app/config/parameters.yml`
+4. To run Homestead on Vagrant:
     1. Initialize homestead: `php vendor/bin/homestead make`
     2. Modify your `Homestead.yaml` file; be sure the `to` property under `sites`
     is pointing to `web` directory instead of `public` and add `type: symfony` below it. (See the `Homestead.yaml.example`)
     3. Run vagrant: `vagrant up`
-4. Initialize database: `php bin/console doctrine:schema:update --force`
+5. Initialize database: `php bin/console doctrine:schema:update --force`
 
 # Initial Requirements
 
