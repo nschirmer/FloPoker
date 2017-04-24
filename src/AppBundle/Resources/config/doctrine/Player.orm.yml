@@ -1,0 +1,22 @@
+AppBundle\Entity\Player:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\PlayerRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '50'
+            unique: true
+        coins:
+            type: integer
+    oneToMany:
+        player_hands:
+            targetEntity: PlayerHand
+            mappedBy: player
+    lifecycleCallbacks: {  }

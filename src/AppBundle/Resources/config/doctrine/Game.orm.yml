@@ -1,0 +1,32 @@
+AppBundle\Entity\Game:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\GameRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        numCards:
+            type: smallint
+            column: num_cards
+        betMax:
+            type: integer
+            column: bet_max
+        betMin:
+            type: integer
+            column: bet_min
+        active:
+            type: boolean
+            column: is_active
+        createdAt:
+            type: datetime
+            column: created_at
+    oneToMany:
+        player_hands:
+            targetEntity: PlayerHand
+            mappedBy: game
+            cascade: ['persist']
+    lifecycleCallbacks: {  }

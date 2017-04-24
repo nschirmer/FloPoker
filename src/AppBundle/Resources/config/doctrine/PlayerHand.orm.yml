@@ -1,0 +1,33 @@
+AppBundle\Entity\PlayerHand:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\PlayerHandRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        score:
+            type: integer
+        bet:
+            type: integer
+            nullable: true
+        won:
+            type: boolean
+            default: false
+    manyToOne:
+        player:
+            targetEntity: Player
+            inversedBy: player_hands
+            fetch: 'EAGER'
+        game:
+            targetEntity: Game
+            inversedBy: player_hands
+    oneToMany:
+        cards:
+            targetEntity: Card
+            mappedBy: hand
+            cascade: ['persist']
+    lifecycleCallbacks: {  }

@@ -1,0 +1,42 @@
+{% import "macros.html.twig" as macros %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Past Games{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1>Past Games</h1>
+        <p>
+            View all games that have been played in chronological order.
+        </p>
+        <div class="row">
+            {% for game in games %}
+            <div class="col col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="badge pull-right">{{ game.getCreatedAt()|date('F jS \\a\\t g:ia', 'America/Chicago') }} CT</span>
+                        <strong>{{ game_types[game.getNumCards()] }}</strong> with <strong>{{ game.getPlayerHands()|length }} players</strong>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            {% set totalPot = 0 %}
+                            {% for hand in game.getPlayerHandsSortedByScore() %}
+                                {% set totalPot = totalPot + hand.getBet() %}
+                                <a href="/player/{{ hand.getPlayer().getId() }}" class="list-group-item">
+                                    <strong>{{ loop.index }}. {{ hand.getPlayer().getName() }}</strong> placed a bet of
+                                    <strong>{{ hand.getBet() }} coin{{ macros.pluralize(hand.getBet()) }}</strong>
+                                    with <strong>{{ scoring_service.getScoreText(hand) }}</strong>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <a class="btn btn-default btn-sm pull-right" href="/results/{{ game.getId() }}">view game</a>
+                        <em>{{ game.getPlayerHandWithHighestScore().getPlayer().getName() }} won the pot of {{ totalPot }} coins.</em>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

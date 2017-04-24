@@ -1,0 +1,67 @@
+{% import "macros.html.twig" as macros %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Place bets{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1>Place bets</h1>
+        <p>
+            Each player has been dealt a hand of cards. One at a time, privately view your hand by having the
+            other player{{ hands|length == 2 ? '' : 's' }} look away, and enter your bet.
+            When finished, close out of your hand to confirm your bet.
+        </p>
+        <form method="post" action="">
+            {% for hand in hands %}
+                <div class="panel panel-default player-container">
+                    <div class="panel-heading">
+                        <span class="player-hand-score pull-right hidden">({{ scoring_service.getScoreText(hand) }})</span>
+                        <h4>
+                            {{ macros.playerNameWithCoins(hand.getPlayer()) }}
+                        </h4>
+                    </div>
+                    <div class="panel-body player-cards player-cards-hidden text-center">
+                        {% for card in hand.getCards() %}
+                            {{ macros.displayPlayingCard(card) }}
+                        {% endfor %}
+                    </div>
+                    <div class="panel-footer player-options text-center clearfix">
+                        <div class="pull-right">
+                            <em>Viewed <span class="player-option-times-viewed" data-value="0">0</span> time(s)</em>
+                        </div>
+
+                        <button type="button" class="btn btn-default player-option-toggle-cards pull-left" data-viewing-text="Hide cards and confirm bet">View cards and place bet</button>
+
+                        <div class="player-option-bet hidden">
+                            <input readonly type="text"
+                                   name="bet[{{ hand.getId() }}]"
+                                   data-slider-value="{{ min([bets[hand.getId()] ?? game.getBetMin(), hand.getPlayer().getCoins()]) }}"
+                                   class="player-option-bet-input slider"
+                                   data-slider-min="{{ game.getBetMin() }}"
+                                   data-slider-max="{{ min([game.getBetMax(), hand.getPlayer().getCoins()]) }}">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <p class="text-center">
+                <button type="submit" class="btn btn-primary btn-lg">Submit Bets</button>
+            </p>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $("input.slider").slider({
+            tooltip: 'always',
+            formatter: function(value) {
+                return 'Current bet: ' + value;
+            }
+        });
+
+        $(".player-container").on('click', '.player-option-toggle-cards', function(e) {
+            e.preventDefault();
+            app.toggleCards($(this).closest('.player-container'));
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,28 @@
+AppBundle\Entity\Card:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\CardRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        handId:
+            type: integer
+            column: hand_id
+        suit:
+            type: string
+            length: '50'
+        rank:
+            type: string
+            length: '25'
+    manyToOne:
+        hand:
+            targetEntity: PlayerHand
+            inversedBy: cards
+            joinColumn:
+                name: hand_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

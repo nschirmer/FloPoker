@@ -1,0 +1,231 @@
+/**
+* Credit to Derek Stephen McLean for the card sprite sheet and CSS file
+* @url https://github.com/delboy1978uk/playing-cards
+*/
+
+.playing-card
+{
+    width: 88px;
+    height: 117px;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: inline-block;
+    background-image: url('../img/cards.png');
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+}
+
+.card-club-ace
+{
+    background-position: 0 0;
+}
+.card-spade-ace
+{
+    background-position: 0 -117px;
+}
+.card-heart-ace
+{
+    background-position: 0 -234px;
+}
+.card-diamond-ace
+{
+    background-position: 0 -351px;
+}
+.card-club-2
+{
+    background-position: -87px 0;
+}
+.card-spade-2
+{
+    background-position: -87px -117px;
+}
+.card-heart-2
+{
+    background-position: -87px -234px;
+}
+.card-diamond-2
+{
+    background-position: -87px -351px;
+}
+.card-club-3
+{
+    background-position: -175px 0;
+}
+.card-spade-3
+{
+    background-position: -175px -117px;
+}
+.card-heart-3
+{
+    background-position: -175px -234px;
+}
+.card-diamond-3
+{
+    background-position: -175px -351px;
+}
+.card-club-4
+{
+    background-position: -261px 0;
+}
+.card-spade-4
+{
+    background-position: -261px -117px;
+}
+.card-heart-4
+{
+    background-position: -261px -234px;
+}
+.card-diamond-4
+{
+    background-position: -261px -351px;
+}
+.card-club-5
+{
+    background-position: -348px 0;
+}
+.card-spade-5
+{
+    background-position: -348px -117px;
+}
+.card-heart-5
+{
+    background-position: -348px -234px;
+}
+.card-diamond-5
+{
+    background-position: -348px -351px;
+}
+.card-club-6
+{
+    background-position: -437px 0;
+}
+.card-spade-6
+{
+    background-position: -437px -117px;
+}
+.card-heart-6
+{
+    background-position: -437px -234px;
+}
+.card-diamond-6
+{
+    background-position: -437px -351px;
+}
+.card-club-7
+{
+    background-position: -525px 0;
+}
+.card-spade-7
+{
+    background-position: -525px -117px;
+}
+.card-heart-7
+{
+    background-position: -525px -234px;
+}
+.card-diamond-7
+{
+    background-position: -525px -351px;
+}
+.card-club-8
+{
+    background-position: -613px 0;
+}
+.card-spade-8
+{
+    background-position: -613px -117px;
+}
+.card-heart-8
+{
+    background-position: -613px -234px;
+}
+.card-diamond-8
+{
+    background-position: -613px -351px;
+}
+.card-club-9
+{
+    background-position: -700px 0;
+}
+.card-spade-9
+{
+    background-position: -700px -117px;
+}
+.card-heart-9
+{
+    background-position: -700px -234px;
+}
+.card-diamond-9
+{
+    background-position: -700px -351px;
+}
+.card-club-10
+{
+    background-position: -788px 0;
+}
+.card-spade-10
+{
+    background-position: -788px -117px;
+}
+.card-heart-10
+{
+    background-position: -788px -234px;
+}
+.card-diamond-10
+{
+    background-position: -788px -351px;
+}
+.card-club-jack
+{
+    background-position: -875px 0;
+}
+.card-spade-jack
+{
+    background-position: -875px -117px;
+}
+.card-heart-jack
+{
+    background-position: -875px -234px;
+}
+.card-diamond-jack
+{
+    background-position: -875px -351px;
+}
+.card-club-queen
+{
+    background-position: -962px 0;
+}
+.card-spade-queen
+{
+    background-position: -962px -117px;
+}
+.card-heart-queen
+{
+    background-position: -962px -234px;
+}
+.card-diamond-queen
+{
+    background-position: -962px -351px;
+}
+.card-club-king
+{
+    background-position: -1050px 0;
+}
+.card-spade-king
+{
+    background-position: -1050px -117px;
+}
+.card-heart-king
+{
+    background-position: -1050px -234px;
+}
+.card-diamond-king
+{
+    background-position: -1050px -351px;
+}
+
+.player-cards-hidden .playing-card, .playing-card-facedown
+{
+    background-image: url('../img/cardback.png');
+    background-position: 0 0;
+}

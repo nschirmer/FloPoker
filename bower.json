@@ -1,0 +1,22 @@
+{
+  "name": "FloPoker",
+  "authors": [
+    "Nick Schirmer <n@ichol.as>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "http://n.ichol.as/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "seiyria-bootstrap-slider": "^9.7.3"
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %} – FloPoker</title>
+        <link rel="stylesheet"
+              href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet"
+              href="{{ asset('assets/vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css') }}">
+        <link rel="stylesheet"
+              href="{{ asset('bundles/playingcard/css/playing-cards.css') }}">
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">FloPoker</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="{{ app.request.get('_route') in ['index', 'start'] ? 'active' : '' }}"><a href="/start">New Game</a></li>
+                            <li class="{{ app.request.get('_route') == 'leaderboard' ? 'active' : '' }}"><a href="/leaderboard">Leaderboard</a></li>
+                            <li class="{{ app.request.get('_route') in ['player', 'history'] ? 'active' : '' }}"><a href="/history">Past Games</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            {% for type, flash_messages in app.session.flashBag.all %}
+                {% for flash_message in flash_messages %}
+                    <div class="alert alert-{{ type }}" role="alert">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            {% block body %}{% endblock %}
+        </div>
+        <script type="text/javascript"
+                src="{{ asset('assets/js/jquery.js') }}"></script>
+        <script type="text/javascript"
+                src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
+        <script type="text/javascript"
+                src="{{ asset('assets/vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js') }}"></script>
+        <script type="text/javascript"
+                src="{{ asset('assets/js/app.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

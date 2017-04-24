@@ -1,0 +1,15 @@
+{% macro playerNameWithCoins(player) %}
+    <strong>{{ player.getName() }}</strong>
+    <span class="badge">{{ player.getCoins() }} coins</span>
+{% endmacro %}
+
+{% macro pluralize(item, pluralVersion, singularVersion) %}{% spaceless %}
+    {% set i = item is iterable ? item|length : item %}
+    {{ i == 1 ? singularVersion|default("") : pluralVersion|default("s") }}
+{% endspaceless %}{% endmacro %}
+
+{% macro displayPlayingCard(card) %}{% spaceless %}
+    {% import 'PlayingCardBundle::cardMacro.html.twig' as cards %}
+
+    {{ cards.display(card) }}
+{% endspaceless %}{% endmacro %}

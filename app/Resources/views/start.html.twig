@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1>Begin new game</h1>
+        <p>
+            Welcome to FloPoker. This webapp is intended as a tech demonstration and as such each game consists of only
+            one round. Each player will be dealt cards and, in turn, be able to privately view their hand and make a bet.
+            The player with the best-scoring hand will win the pot.
+        </p>
+        <form id="start-game-form" class="form-inline" method="post" action="/start">
+            <div class="panel panel-default">
+                <div class="panel-heading">Select game type</div>
+                <div class="panel-body">
+                    <div class="btn-group" data-toggle="buttons">
+                        {% for value, name in game_types %}
+                            <label class="btn btn-primary {{ num_cards == value ? 'active' : '' }}">
+                                <input type="radio" name="num_cards" value="{{ value }}" autocomplete="off" {{ num_cards == value ? 'checked' : '' }}> {{ name }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Enter up to five player names</div>
+                <div class="panel-body">
+                    {% for i in 0..4 %}
+                        <div class="form-group">
+                            <input type="text" name="name[]" value="{{ name[i] ?? '' }}" class="form-control" placeholder="Player #{{ loop.index }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <p><input type="submit" class="btn btn-primary btn-lg" value="Enter game"></p>
+        </form>
+    </div>
+{% endblock %}

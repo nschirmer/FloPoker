@@ -1,0 +1,49 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    app.game.bet_min: 5
+    app.game.bet_max: 20
+    app.game.num_cards: 5
+    app.player.starting_coins: 20
+    app.game.types:
+        3: "Three Card Poker"
+        4: "Four Card Poker"
+        5: "Five Card Poker"
+
+services:
+    cards.card_generator:
+        class: AppBundle\Service\CardGenerator
+    cards.deck_builder:
+        class: PlayingCardBundle\Service\DeckBuilder
+        calls:
+            - [setCardGenerator, ['@cards.card_generator']]
+    cards.dealer_manager:
+        class: PlayingCardBundle\Service\DealerManager
+
+    app.game_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Game
+        public: false
+    app.player_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Player
+        public: false
+
+    app.scoring_service:
+        class: AppBundle\Service\PokerScoringService
+    app.game_service:
+        class: AppBundle\Service\GameService
+        arguments: ['@service_container']
+        calls:
+            - [setDeckBuilder, ['@cards.deck_builder']]
+            - [setDealerManager, ['@cards.dealer_manager']]
+            - [setScoringService, ['@app.scoring_service']]
+            - [setGameRepository, ['@app.game_repository']]
+            - [setPlayerRepository, ['@app.player_repository']]
+    app.leaderboard:
+        class: AppBundle\Service\LeaderboardService
+        arguments: ['@app.game_repository', '@app.player_repository']

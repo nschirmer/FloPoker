@@ -1,0 +1,3 @@
+{% macro display(card) %}
+<div class="playing-card card-{{ card.getSuit()|lower }}-{{ card.getRank()|lower }}"></div>
+{% endmacro %}

@@ -1,0 +1,61 @@
+{% import "macros.html.twig" as macros %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Leaderboard{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1>Leaderboard</h1>
+        <p>
+            View the best players on the site as well as the best hands played so far.
+        </p>
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Most Coins</div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            {% for player in mostCoins %}
+                                <a href="/player/{{ player.getId() }}" class="list-group-item">
+                                    <strong>{{ loop.index }}. {{ player.getName() }}</strong> with
+                                    <strong>{{ player.getCoins() }} coin{{ macros.pluralize(player.getCoins()) }}</strong>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Most Wins</div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            {% for v in mostWins %}
+                                {% set player = v[0] %}
+                                <a href="/player/{{ player.getId() }}" class="list-group-item">
+                                    <strong>{{ loop.index }}. {{ player.getName() }}</strong> with
+                                    <strong>{{ v.hands_won }} win{{ macros.pluralize(v.hands_won) }}</strong>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Best Winning Hands</div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            {% for hand in bestWinningHands %}
+                                <a href="/results/{{ hand.getGame().getId() }}" class="list-group-item">
+                                    <strong>{{ loop.index }}. {{ hand.getPlayer().getName() }}</strong> with
+                                    <strong>{{ scoring_service.getScoreText(hand) }}</strong>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
