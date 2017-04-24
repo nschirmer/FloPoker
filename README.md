@@ -1,7 +1,7 @@
 FloPoker
 ========
 
-A Symfony project created by [Nick Schirmer](n@ichol.as) as a tech demonstration for FloSports in April 2017.
+A Symfony project created by Nick Schirmer as a tech demonstration for FloSports in April 2017.
 
 # Setup
 
@@ -36,3 +36,5 @@ _The `code-coverage` directory is already included in `.gitignore`_
 Thanks to [subskybox](https://www.codeproject.com/articles/569271/a-poker-hand-analyzer-in-javascript-using-bit-math) 
 for the wonderful 5-card Poker Scoring algorithm which was utilized in this project and adapted to work with 
 3-card and 4-card Poker hands.
+
+Thanks to [Derek Stephen McLean](https://github.com/delboy1978uk/playing-cards) for the CSS image sprite for standard 52 playing cards.
