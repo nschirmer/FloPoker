@@ -14,6 +14,7 @@ use PlayingCardBundle\Service\ScoringServiceInterface;
 use PlayingCardBundle\Util\DealerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * Class GameService
@@ -172,6 +173,21 @@ class GameService
             $playerName,
             $this->container->getParameter('app.player.starting_coins')
         );
+    }
+
+    /**
+     * @param PlayerInterface $player
+     * @return ConstraintViolationListInterface
+     */
+    public function getPlayerValidationErrors(PlayerInterface $player)
+    {
+        $errors = $this->container->get('validator')->validate($player);
+
+        $errors = array_map(function ($err) {
+            return $err->getMessage();
+        }, iterator_to_array($errors));
+
+        return $errors;
     }
 
     /**

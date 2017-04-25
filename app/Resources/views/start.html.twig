@@ -26,7 +26,7 @@
                 <div class="panel-body">
                     {% for i in 0..4 %}
                         <div class="form-group">
-                            <input type="text" name="name[]" value="{{ name[i] ?? '' }}" class="form-control" placeholder="Player #{{ loop.index }}">
+                            <input type="text" name="name[]" value="{{ name[i] ?? '' }}" maxlength="50" class="form-control" placeholder="Player #{{ loop.index }}">
                         </div>
                     {% endfor %}
                 </div>

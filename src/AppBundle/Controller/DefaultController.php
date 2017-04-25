@@ -1,8 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 
-use AppBundle\Exception\InvalidBetPlacedException;
-use AppBundle\Exception\InvalidPlayerAddedException;
+use AppBundle\Exception\GameException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +40,7 @@ class DefaultController extends Controller
                     $table = $this->get('app.game_service')->newGameTable($playerNames, $num_cards);
 
                     return $this->redirectToRoute('play', ['gameId' => $table->getGame()->getId()]);
-                } catch (InvalidPlayerAddedException $err) {
+                } catch (GameException $err) {
                     $this->addFlash('warning', $err->getMessage());
                 }
             }
@@ -79,7 +78,7 @@ class DefaultController extends Controller
                 $table->save();
 
                 return $this->redirectToRoute('results', ['gameId' => $gameId]);
-            } catch (InvalidBetPlacedException $err) {
+            } catch (GameException $err) {
                 $this->addFlash('warning', $err->getMessage());
             }
         }

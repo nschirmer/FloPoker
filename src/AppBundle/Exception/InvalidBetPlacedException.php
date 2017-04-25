@@ -1,7 +1,7 @@
 <?php
 namespace AppBundle\Exception;
 
-class InvalidBetPlacedException extends \RuntimeException
+class InvalidBetPlacedException extends GameException
 {
 
 }

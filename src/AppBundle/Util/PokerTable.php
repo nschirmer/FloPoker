@@ -59,8 +59,11 @@ class PokerTable implements TableInterface
     public function addPlayer(string $playerName): TableInterface
     {
         $player = $this->gameService->getPlayer($playerName);
+        $validationErrors = $this->gameService->getPlayerValidationErrors($player);
 
-        if ($this->game->hasPlayer($player)) {
+        if (count($validationErrors) > 0) {
+            throw new InvalidPlayerAddedException(implode(" ", $validationErrors));
+        } elseif ($this->game->hasPlayer($player)) {
             throw new InvalidPlayerAddedException('Unique player names must be used');
         }
 

@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -17,6 +18,16 @@ class Player implements PlayerInterface
 
     /**
      * @var string
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "Player names must be at least {{ limit }} chars long.",
+     *     maxMessage = "Player names cannot be longer than {{ limit }} chars."
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[a-z0-9 ]+$/i",
+     *     message = "Player names may only consist of alphanumerical chars and spaces."
+     * )
      */
     private $name;
 
@@ -61,7 +72,7 @@ class Player implements PlayerInterface
      */
     public function setName(string $name): PlayerInterface
     {
-        $this->name = $name;
+        $this->name = trim($name);
 
         return $this;
     }

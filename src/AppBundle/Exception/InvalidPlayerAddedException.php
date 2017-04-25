@@ -1,7 +1,7 @@
 <?php
 namespace AppBundle\Exception;
 
-class InvalidPlayerAddedException extends \RuntimeException
+class InvalidPlayerAddedException extends GameException
 {
 
 }
