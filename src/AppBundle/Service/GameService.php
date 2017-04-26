@@ -167,6 +167,10 @@ class GameService
         return $dealer;
     }
 
+    /**
+     * @param string $playerName
+     * @return PlayerInterface
+     */
     public function getPlayer(string $playerName): PlayerInterface
     {
         return $this->playerRepository->findByNameOrCreateWithCoins(
